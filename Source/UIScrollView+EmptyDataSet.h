@@ -47,6 +47,10 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 /**
+ 是否需要添加空视图
+ */
+-(BOOL)isNeedAddEmptyDataSet;
+/**
  Asks the data source for the title of the dataset.
  The dataset uses a fixed font style by default, if no attributes are set. If you want a different font style, return a attributed string.
  

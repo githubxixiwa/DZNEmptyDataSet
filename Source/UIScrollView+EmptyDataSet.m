@@ -104,7 +104,11 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
 
 - (BOOL)dzn_canDisplay
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource conformsToProtocol:@protocol(DZNEmptyDataSetSource)]) {
+    BOOL isCanDisplay = YES;
+    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(isNeedAddEmptyDataSet)]) {
+        isCanDisplay = [self.emptyDataSetSource isNeedAddEmptyDataSet];
+    }
+    if (self.emptyDataSetSource && [self.emptyDataSetSource conformsToProtocol:@protocol(DZNEmptyDataSetSource)] && isCanDisplay) {
         if ([self isKindOfClass:[UITableView class]] || [self isKindOfClass:[UICollectionView class]] || [self isKindOfClass:[UIScrollView class]]) {
             return YES;
         }
